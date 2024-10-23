@@ -12,7 +12,7 @@ class FirebasePushNotificationHelper {
     // Load Firebase service account credentials from a JSON file
     func loadServiceAccount(fileName:String) -> FirebaseCredentials? {
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "json") else {
-            print("Failed to find megically.json in bundle.")
+            print("Failed to find .json in bundle.")
             return nil
         }
         do {
