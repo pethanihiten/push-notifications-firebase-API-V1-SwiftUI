@@ -4,8 +4,6 @@
 //
 //  Created by Vedika on 08/10/24.
 //
-
-
 import Foundation
 import SwiftJWT
 
@@ -155,12 +153,28 @@ class FirebasePushNotificationHelper {
 
             if let httpResponse = response as? HTTPURLResponse {
                 if httpResponse.statusCode == 200 {
-                    print("Push notification sent successfully to topic")
+                    print("Push notification sent successfully to topic \(topic)")
                 } else {
                     print("Failed to send push notification, status code: \(httpResponse.statusCode)")
                 }
             }
+
+            // Print the response data as string or JSON
+            if let data = data {
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response data: \(responseString)")
+                }
+
+                // Optionally, try to convert it to JSON
+                do {
+                    let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                    print("JSON response: \(jsonResponse)")
+                } catch {
+                    print("Failed to parse JSON response: \(error)")
+                }
+            }
         }
+
         task.resume()
     }
 }
